@@ -41,6 +41,17 @@ public class AnimNumberView extends LinearLayout implements View.OnClickListener
     private ObjectAnimator mEditShowAnim;
     private ObjectAnimator mEditHideAnim;
 
+    private OnNumberValueChanged mOnNumberValueChanged;
+
+    public interface OnNumberValueChanged{
+        /**
+         *
+         * @param value
+         * @return
+         */
+        public boolean numberChanged(int value);
+    }
+
     public AnimNumberView(Context context) {
         this(context, null);
     }
@@ -55,10 +66,11 @@ public class AnimNumberView extends LinearLayout implements View.OnClickListener
         mImgAdd = (ImageView) findViewById(R.id.btn_add);
         mImgMin = (ImageView) findViewById(R.id.btn_min);
         mEditText = (EditText) findViewById(R.id.edit_count);
-
         mImgAdd.setOnClickListener(this);
         mImgMin.setOnClickListener(this);
     }
+
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -103,6 +115,9 @@ public class AnimNumberView extends LinearLayout implements View.OnClickListener
     @Override
     public void onClick(View v) {
         int count = getCount(mEditText.getText().toString());
+        if (mOnNumberValueChanged != null && !mOnNumberValueChanged.numberChanged(count)) {
+            return;
+        }
         switch (v.getId()) {
             case R.id.btn_add:
                 count++;
@@ -160,5 +175,9 @@ public class AnimNumberView extends LinearLayout implements View.OnClickListener
         mImgAdd.setEnabled(enabled);
         mImgMin.setEnabled(enabled);
         mEditText.setEnabled(enabled);
+    }
+
+    public void setOnNumberValueChanged(OnNumberValueChanged onNumberValueChanged) {
+        this.mOnNumberValueChanged = onNumberValueChanged;
     }
 }
