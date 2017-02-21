@@ -26,6 +26,10 @@ import com.zj.example.numberview.R;
  */
 public class AnimNumberView extends LinearLayout implements View.OnClickListener, Animator.AnimatorListener {
     public static final int DURATION = 400;
+    public static final String ROTATION = "rotation";
+    public static final String TRANSLATION_X = "translationX";
+    public static final String ALPHA = "alpha";
+
     private ImageView mImgAdd;
     private ImageView mImgMin;
     private EditText mEditText;
@@ -63,13 +67,13 @@ public class AnimNumberView extends LinearLayout implements View.OnClickListener
     }
 
     private void initAnim(int w, int h) {
-        PropertyValuesHolder positiveRotationValuesHolder = PropertyValuesHolder.ofFloat("rotation", 0, 360);
-        PropertyValuesHolder negativeRotationLeftValuesHolder = PropertyValuesHolder.ofFloat("rotation", 0, -360);
-        PropertyValuesHolder addTranslationXRightValuesHolder = PropertyValuesHolder.ofFloat("translationX", 0, w / 2 - mImgAdd.getMeasuredWidth() / 2);
-        PropertyValuesHolder addTranslationXLeftValuesHolder = PropertyValuesHolder.ofFloat("translationX", w / 2 - mImgAdd.getMeasuredWidth() / 2, 0);
+        PropertyValuesHolder positiveRotationValuesHolder = PropertyValuesHolder.ofFloat(ROTATION, 0, 360);
+        PropertyValuesHolder negativeRotationLeftValuesHolder = PropertyValuesHolder.ofFloat(ROTATION, 0, -360);
+        PropertyValuesHolder addTranslationXRightValuesHolder = PropertyValuesHolder.ofFloat(TRANSLATION_X, 0, w / 2 - mImgAdd.getMeasuredWidth() / 2);
+        PropertyValuesHolder addTranslationXLeftValuesHolder = PropertyValuesHolder.ofFloat(TRANSLATION_X, w / 2 - mImgAdd.getMeasuredWidth() / 2, 0);
 
-        PropertyValuesHolder minTranslationXLeftValuesHolder = PropertyValuesHolder.ofFloat("translationX", 0, -1 * (w / 2 - mImgAdd.getMeasuredWidth() / 2));
-        PropertyValuesHolder minTranslationXRightValuesHolder = PropertyValuesHolder.ofFloat("translationX", -1 * (w / 2 - mImgAdd.getMeasuredWidth() / 2), 0);
+        PropertyValuesHolder minTranslationXLeftValuesHolder = PropertyValuesHolder.ofFloat(TRANSLATION_X, 0, -1 * (w / 2 - mImgAdd.getMeasuredWidth() / 2));
+        PropertyValuesHolder minTranslationXRightValuesHolder = PropertyValuesHolder.ofFloat(TRANSLATION_X, -1 * (w / 2 - mImgAdd.getMeasuredWidth() / 2), 0);
 
         mAddRightAnim = ObjectAnimator.ofPropertyValuesHolder(mImgAdd, positiveRotationValuesHolder, addTranslationXRightValuesHolder);
         mAddRightAnim.setDuration(DURATION);
@@ -87,11 +91,11 @@ public class AnimNumberView extends LinearLayout implements View.OnClickListener
         mMinRightAnim.setDuration(DURATION);
         mMinRightAnim.addListener(this);
 
-        mEditShowAnim = ObjectAnimator.ofFloat(mEditText, "alpha", 0, 1f);
+        mEditShowAnim = ObjectAnimator.ofFloat(mEditText, ALPHA, 0, 1f);
         mEditShowAnim.setDuration(DURATION);
         mEditShowAnim.addListener(this);
 
-        mEditHideAnim = ObjectAnimator.ofFloat(mEditText, "alpha", 1f, 0);
+        mEditHideAnim = ObjectAnimator.ofFloat(mEditText, ALPHA, 1f, 0);
         mEditHideAnim.setDuration(DURATION);
         mEditHideAnim.addListener(this);
     }
