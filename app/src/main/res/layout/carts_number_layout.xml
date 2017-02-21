@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:background="@color/colorAccent"
     android:orientation="horizontal">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/btn_min"
         android:layout_width="34dp"
         android:layout_height="30dp"
+        android:layout_centerInParent="true"
         android:background="?selectableItemBackgroundBorderless"
         android:scaleType="center"
-        app:srcCompat="@drawable/vector_minus_20"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:srcCompat="@drawable/vector_minus_20"/>
 
     <EditText
         android:id="@+id/edit_count"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_gravity="center_vertical"
         android:background="@null"
         android:digits="1234567890"
@@ -40,7 +41,8 @@
         android:id="@+id/btn_add"
         android:layout_width="34dp"
         android:layout_height="30dp"
+        android:layout_centerInParent="true"
         android:background="?selectableItemBackgroundBorderless"
         android:scaleType="center"
         app:srcCompat="@drawable/vector_add_20"/>
-</LinearLayout>
+</RelativeLayout>
